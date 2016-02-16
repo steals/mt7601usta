@@ -1491,7 +1491,7 @@ VOID	RTUSBCleanUpDataBulkOutQueue(
 	
 	DBGPRINT(RT_DEBUG_TRACE, ("--->CleanUpDataBulkOutQueue\n"));
 
-	for (Idx = 0; Idx < 4; Idx++)
+	for (Idx = 0; Idx < NUM_OF_TX_RING; Idx++)
 	{
 		pTxContext = &pAd->TxContext[Idx];
 		
@@ -1626,7 +1626,7 @@ VOID	RTUSBCancelPendingBulkOutIRP(
 /*	pLock = &pAd->BulkOutLock[MGMTPIPEIDX];*/
 /*	pPending = &pAd->BulkOutPending[MGMTPIPEIDX];*/
 
-	for (Idx = 0; Idx < 4; Idx++)
+	for (Idx = 0; Idx < NUM_OF_TX_RING; Idx++)
 	{
 		pHTTXContext = &(pAd->TxContext[Idx]);
 
@@ -1685,7 +1685,7 @@ VOID	RTUSBCancelPendingBulkOutIRP(
 	if (pPsPollContext->IRPPending == TRUE)
 		RTUSB_UNLINK_URB(pPsPollContext->pUrb);
 
-	for (Idx = 0; Idx < 4; Idx++)
+	for (Idx = 0; Idx < NUM_OF_TX_RING; Idx++)
 	{
 		NdisAcquireSpinLock(&pAd->BulkOutLock[Idx]);
 		pAd->BulkOutPending[Idx] = FALSE;

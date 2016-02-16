@@ -157,7 +157,7 @@ VOID RTMPResetTxRxRingMemory(
 	
 	
 	/* Free Tx frame resource*/
-	for (acidx = 0; acidx < 4; acidx++)
+	for (acidx = 0; acidx < NUM_OF_TX_RING; acidx++)
 	{
 		PHT_TX_CONTEXT pHTTXContext = &(pAd->TxContext[acidx]);
 		if (pHTTXContext && pHTTXContext->pUrb)
@@ -284,7 +284,7 @@ VOID	RTMPFreeTxRxRingMemory(
 	
 	
 	/* Free Tx frame resource*/
-	for (acidx = 0; acidx < 4; acidx++)
+	for (acidx = 0; acidx < NUM_OF_TX_RING; acidx++)
 	{
 		PHT_TX_CONTEXT pHTTXContext = &(pAd->TxContext[acidx]);
 		if (pHTTXContext)
@@ -397,7 +397,7 @@ NDIS_STATUS	NICInitTransmit(
 	DBGPRINT(RT_DEBUG_TRACE, ("--> NICInitTransmit\n"));
 
 
-	/* Init 4 set of Tx parameters*/
+	/* Init set of Tx parameters*/
 	for(acidx = 0; acidx < NUM_OF_TX_RING; acidx++)
 	{
 		/* Initialize all Transmit releated queues*/
@@ -412,7 +412,7 @@ NDIS_STATUS	NICInitTransmit(
 	do
 	{
 		
-		/* TX_RING_SIZE, 4 ACs*/
+		/* TX_RING_SIZE, ACs*/
 		
 		for(acidx=0; acidx<NUM_OF_TX_RING; acidx++)
 		{
@@ -572,7 +572,7 @@ NDIS_STATUS	RTMPAllocTxRxRingMemory(
 		/* Init send data structures and related parameters*/
 		
 		
-		/* TX_RING_SIZE, 4 ACs*/
+		/* TX_RING_SIZE, ACs*/
 		
 		for(acidx=0; acidx<NUM_OF_TX_RING; acidx++)
 		{
@@ -725,7 +725,7 @@ NDIS_STATUS RTMPInitTxRxRingMemory
 }
 
 
-#else
+#else //#ifdef RTMP_MAC_USB
 
 /*
 ========================================================================
@@ -857,7 +857,7 @@ NDIS_STATUS	NICInitTransmit(
 	DBGPRINT(RT_DEBUG_TRACE, ("--> NICInitTransmit\n"));
 	pObj = pObj;
 
-	/* Init 4 set of Tx parameters*/
+	/* Init set of Tx parameters*/
 	for(acidx = 0; acidx < NUM_OF_TX_RING; acidx++)
 	{
 		/* Initialize all Transmit releated queues*/
@@ -872,7 +872,7 @@ NDIS_STATUS	NICInitTransmit(
 	do
 	{
 		
-		/* TX_RING_SIZE, 4 ACs*/
+		/* TX_RING_SIZE, ACs*/
 		
 		for(acidx=0; acidx<NUM_OF_TX_RING; acidx++)
 		{
@@ -1042,7 +1042,7 @@ err:
 	
 	
 	/* Tx Ring*/
-	for (acidx = 0; acidx < 4; acidx++)
+	for (acidx = 0; acidx < NUM_OF_TX_RING; acidx++)
 	{
 		PHT_TX_CONTEXT pHTTxContext = &(pAd->TxContext[acidx]);
 		if (pHTTxContext)
@@ -1234,7 +1234,7 @@ VOID	RTMPFreeTxRxRingMemory(
 	
 	
 	/* Free Tx frame resource*/
-	for (acidx = 0; acidx < 4; acidx++)
+	for (acidx = 0; acidx < NUM_OF_TX_RING; acidx++)
 		{
 		PHT_TX_CONTEXT pHTTXContext = &(pAd->TxContext[acidx]);
 			if (pHTTXContext)
@@ -1276,7 +1276,7 @@ VOID	RTMPFreeTxRxRingMemory(
 	DBGPRINT(RT_DEBUG_ERROR, ("<--- RTMPFreeTxRxRingMemory\n"));
 }
 
-#endif /* RESOURCE_PRE_ALLOC */
+#endif //#ifdef RTMP_MAC_USB
 
 
 /*

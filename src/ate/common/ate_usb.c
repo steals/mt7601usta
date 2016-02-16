@@ -606,7 +606,7 @@ VOID RTUSBRejectPendingPackets(
 	PQUEUE_HEADER	pQueue;
 	
 
-	for (Index = 0; Index < 4; Index++)
+	for (Index = 0; Index < NUM_OF_TX_RING; Index++)
 	{
 		NdisAcquireSpinLock(&pAd->TxSwQueueLock[Index]);
 		while (pAd->TxSwQueue[Index].Head != NULL)
